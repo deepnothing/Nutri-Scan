@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "food-scanner",
+    "name": "Nutri-Scan",
     "slug": "food-scanner",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FF6347"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,12 +17,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.deepnothing.foodscanner",
+      "buildNumber": "1",
+      "infoPlist": {
+        "GADIsAdManagerApp": true
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3184251687444573~2298607119"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#FF6347"
+      },
+      "package": "com.deepnothing.foodscanner",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3184251687444573~2298607119"
       }
     },
     "web": {
