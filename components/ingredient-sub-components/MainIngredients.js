@@ -30,7 +30,7 @@ export default function MainIngredients(props) {
             }
         }
 
-    }, [props.icons])
+    }, [props.icons, props.ingredient])
 
     //responsive text color to contrast with light/dark background
     const getColorByBgColor = (bgColor) => {
