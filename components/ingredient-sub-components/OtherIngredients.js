@@ -14,7 +14,7 @@ export default function OtherIngredients(props) {
                 break
             }
         }
-    }, [props.icons, props.ingredient])
+    })
 
     const [fontLoaded] = useFonts({
         Bubblewump: require('../../assets/fonts/Bubblewump.ttf'),

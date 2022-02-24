@@ -6,7 +6,6 @@ import { useFonts } from 'expo-font';
 import { useNetInfo } from "@react-native-community/netinfo";
 import GoogleAds from './components/GoogleAds';
 
-// await setTestDeviceIDAsync('EMULATOR');
 
 
 export default function App() {
