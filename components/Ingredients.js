@@ -67,18 +67,6 @@ export default function Ingredients(props) {
     let mainCount = [];
 
 
-    //    const IconSelector = (ingredient, icons) => {
-
-    //         for (let i = 0; i < icons.length; i++) {
-    //             if (ingredient.includes(icons[i])) {
-    //                 iconImages.push(`https://teoudovcic.com/Nutri-Scan/${icons[i]}.png`)
-    //             } else {
-
-    //                 iconImages.push(`https://teoudovcic.com/Nutri-Scan/other.png`)
-
-    //             }
-    //         }
-    //     }
 
 
     return (
