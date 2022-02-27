@@ -13,6 +13,12 @@
     "production": {}
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "itunes@linuxmail.org",
+        "ascAppId": "1611085311",
+        "appleTeamId": "A8Q9U5W4XJ"
+      }
+    }
   }
 }

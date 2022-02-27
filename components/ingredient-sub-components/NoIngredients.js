@@ -15,7 +15,9 @@ export default function NoIngredients(props) {
 
     return (
         <>
-            <GoogleAds />
+            <GoogleAds
+                hasTrackingPermission={props.hasTrackingPermission}
+            />
             <View style={styles.container}
                 onTouchStart={() => props.touchStart(false)}
                 onTouchEnd={() => props.touchEnd(true)}

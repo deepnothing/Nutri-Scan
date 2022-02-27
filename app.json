@@ -2,7 +2,7 @@
   "expo": {
     "name": "Nutri-Scan",
     "slug": "food-scanner",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -10,6 +10,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#FF6347"
     },
+    "plugins": [
+      [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        }
+      ]
+    ],
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -19,9 +27,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.deepnothing.foodscanner",
-      "buildNumber": "1",
+      "buildNumber": "6",
       "infoPlist": {
-        "GADIsAdManagerApp": true
+        "GADIsAdManagerApp": true,
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."
       },
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-3184251687444573~2298607119"

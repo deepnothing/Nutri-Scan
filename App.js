@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, StatusBar, Image, ActivityIndicator, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, StatusBar, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 import Ingredients from './components/Ingredients';
 import { useFonts } from 'expo-font';
 import { useNetInfo } from "@react-native-community/netinfo";
@@ -16,10 +17,11 @@ export default function App() {
     Melancholy: require('./assets/fonts/Melancholy.otf')
   })
   const [hasPermission, setHasPermission] = useState(null);
+  const [hasTrackingPermission, setHasTrackingPermission] = useState(true);
   const [scanned, setScanned] = useState(false);
   const [ingredients, setIngredients] = useState();
   const [error, setError] = useState();
-  const [infoVisibility, setInfoVisibility] = useState(false)
+  const [infoVisibility, setInfoVisibility] = useState(true)
 
   //check if device has an internet connection
   const netInfo = useNetInfo();
@@ -30,6 +32,13 @@ export default function App() {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
+    //request google ads tracking permission
+    (async () => {
+      const { status } = await requestTrackingPermissionsAsync();
+      if (status === 'denied') {
+        setHasTrackingPermission(false)
+      }
+    })();
 
   }, []);
 
@@ -38,7 +47,7 @@ export default function App() {
 
   const handleBarCodeScanned = ({ type, data }) => {
 
-    if (netInfo?.isConnected) {
+    if (netInfo?.isConnected && !infoVisibility) {
 
       //fetch ingredients from API
       fetch(`https://world.openfoodfacts.org/api/v0/product/${data}.json`)
@@ -54,10 +63,27 @@ export default function App() {
 
   //camera permission handling 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return (
+      <View style={styles.permissionContainer}>
+        <Text style={styles.permissionText}>
+          Requesting camera permission
+        </Text>
+      </View>
+    )
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return (
+      <View style={styles.permissionContainer}>
+        <Text style={styles.permissionText}>
+          No access to camera
+        </Text>
+        <Text>&nbsp;</Text>
+        <Image
+          style={styles.icon}
+          source={require('./assets/system-icons/sad.png')}
+        />
+      </View>
+    )
   }
 
   if (!fontLoaded) {
@@ -82,7 +108,9 @@ export default function App() {
         <View style={styles.container}>
 
           {!scanned ?
-            < GoogleAds />
+            < GoogleAds
+              hasTrackingPermission={hasTrackingPermission}
+            />
             :
             null
           }
@@ -110,16 +138,22 @@ export default function App() {
                     style={styles.chatBubble}
                   />
                   <Text style={styles.infoMessage}>
-                    💡 Make sure barcode is clean and in a well  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lit area.
+                    🥫 Grab any food item with a barcode to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;begin.
                   </Text>
                   <Text style={styles.infoMessage}>
-                    🤓 All ingredients are rounded to the nearest &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whole number.
+                    💡 Make sure barcode is clean and in a  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;well lit area.
                   </Text>
                   <Text style={styles.infoMessage}>
-                    ☝️ Ingredients under 10% are placed in the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swipable tab labeled "other".
+                    🤓 All ingredients are rounded to the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearest whole number.
                   </Text>
                   <Text style={styles.infoMessage}>
-                    💯 Items with ingredients totaling over  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100% will have sub-ingredients removed
+                    ☝️ Ingredients under 10% are placed in &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the swipable tab labeled "other".
+                  </Text>
+                  <Text style={styles.infoMessage}>
+                    💯 Items with ingredients totaling over &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100% will have sub-ingredients &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removed.
+                  </Text>
+                  <Text style={styles.infoMessage}>
+                    ℹ️ Tap the blue information icon below to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;close this message and begin &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanning!
                   </Text>
 
                 </View>
@@ -158,6 +192,7 @@ export default function App() {
           data={ingredients}
           return={setScanned}
           scanned={scanned}
+          hasTrackingPermission={hasTrackingPermission}
         />
       </View>
     </>
@@ -227,10 +262,10 @@ const styles = StyleSheet.create({
   infoContainer: {
     position: 'absolute',
     backgroundColor: '#FFF',
-    height: 240,
-    width: 360,
+    height: 400,
+    width: 390,
     left: 10,
-    top: -220,
+    top: -390,
     padding: 15,
     borderRadius: 20,
     display: 'flex',
@@ -239,9 +274,9 @@ const styles = StyleSheet.create({
   },
 
   infoMessage: {
-    fontSize: 15,
-    fontWeight: '700'
-    // fontFamily: 'Bubblewump'
+    fontSize: 18,
+    fontWeight: '700',
+    lineHeight: 20
   },
 
   chatBubble: {
@@ -249,11 +284,22 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     left: 3,
-    top: 225
+    top: 385
   },
   infoIcon: {
     height: 30,
     width: 30
+  },
+  permissionContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#FF6347"
+  },
+  permissionText: {
+    fontSize: 15,
+    fontWeight: 'bold'
   }
 
 

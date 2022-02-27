@@ -9,10 +9,10 @@ export default function MainIngredients(props) {
 
     //extract color form server icon
     async function fetchColors(image) {
-        const result = await ImageColors.getColors(image)
-        if (result.platform === 'ios') {
+        const result = await ImageColors.getColors(image).catch(error => console.log(error))
+        if (result?.platform === 'ios') {
             setBackgroundColor(result.background)
-        } else if (result.platform === 'android') {
+        } else if (result?.platform === 'android') {
             setBackgroundColor(result.vibrant)
         }
     }

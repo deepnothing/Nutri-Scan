@@ -18,6 +18,7 @@
     "expo-dev-client": "~0.8.4",
     "expo-font": "~10.0.4",
     "expo-status-bar": "~1.2.0",
+    "expo-tracking-transparency": "^2.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",

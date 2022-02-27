@@ -49,7 +49,7 @@ export default function OtherIngredients(props) {
                 }%
             </Text>
             <Text style={[styles.ingredientLabel, { fontSize: props.underZero <= 9 ? 18 : 25 }]}>
-                {props.text}
+                {props.text.toLowerCase()}
             </Text>
 
             <Image
