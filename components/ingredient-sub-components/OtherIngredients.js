@@ -1,6 +1,21 @@
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet, Dimensions, PixelRatio } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
+
+const {
+    width,
+    height,
+} = Dimensions.get('window');
+
+
+
+const normalize = (size, multiplier = 2) => {
+    const scale = (width / height) * multiplier;
+
+    const newSize = size * scale;
+
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+}
 
 export default function OtherIngredients(props) {
     const ingredientText = props.text.toLowerCase();
@@ -28,9 +43,9 @@ export default function OtherIngredients(props) {
     //responsive icon image size if container under 10%
     const otherIconStyles = (size) => {
         return {
-            width: size <= 9 ? 30 : 70,
-            height: size <= 9 ? 30 : 70,
-            marginRight: 10,
+            width: size <= 9 ? width / 8 : width / 6,
+            height: size <= 9 ? height / 17 : height / 13,
+            marginRight: "3%",
         }
     }
 
@@ -41,14 +56,14 @@ export default function OtherIngredients(props) {
             style={[styles.otheringredientStyle, { width: props.width }]}
 
         >
-            <Text style={[styles.percentage, { fontSize: props.underZero <= 9 ? 30 : 40 }]}>
+            <Text style={[styles.percentage, { fontSize: props.underZero <= 9 ? normalize(35) : normalize(45) }]}>
                 {props.defaultIcon ?
                     props.underZero
                     :
                     Math.ceil(props.ingredient.percent_estimate * 10) / 10
                 }%
             </Text>
-            <Text style={[styles.ingredientLabel, { fontSize: props.underZero <= 9 ? 18 : 25 }]}>
+            <Text style={[styles.ingredientLabel, { fontSize: props.underZero <= 9 ? normalize(20) : normalize(27) }]}>
                 {props.text.toLowerCase()}
             </Text>
 
@@ -79,7 +94,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF6347'
     },
     ingredientLabel: {
-        fontSize: 25,
         width: 190,
         marginRight: 0,
         fontFamily: 'Bubblewump',

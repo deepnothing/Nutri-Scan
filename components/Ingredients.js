@@ -235,9 +235,9 @@ const styles = StyleSheet.create({
 
     closeTab: {
         position: 'absolute',
-        height: 70,
-        width: 32,
-        top: 420,
+        height: "8%",
+        width: "8%",
+        top: "45%",
         zIndex: 3,
         borderBottomWidth: 1,
         borderTopWidth: 1,
@@ -251,21 +251,13 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 10
     }
     , closeIcon: {
-        height: 40,
-        width: 17,
+        height: "63%",
+        width: "62%",
         left: 5,
-        opacity: 0.8
+        opacity: 0.6
 
     },
 
-    viewBox: {
-        paddingHorizontal: 20,
-        justifyContent: 'center',
-        width: width,
-        padding: 10,
-        alignItems: 'center',
-        height: 150
-    },
     slider: {
         alignSelf: 'center',
         justifyContent: 'center',

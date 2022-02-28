@@ -2,7 +2,7 @@
   "expo": {
     "name": "Nutri-Scan",
     "slug": "food-scanner",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -27,7 +27,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.deepnothing.foodscanner",
-      "buildNumber": "6",
+      "buildNumber": "7",
       "infoPlist": {
         "GADIsAdManagerApp": true,
         "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."

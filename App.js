@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, StatusBar, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, StatusBar, Image, ActivityIndicator, TouchableOpacity, PixelRatio, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 import Ingredients from './components/Ingredients';
@@ -8,6 +8,19 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import GoogleAds from './components/GoogleAds';
 
 
+const {
+  width,
+  height,
+} = Dimensions.get('window');
+
+
+const normalize = (size, multiplier = 2) => {
+  const scale = (width / height) * multiplier;
+
+  const newSize = size * scale;
+
+  return Math.round(PixelRatio.roundToNearestPixel(newSize));
+}
 
 export default function App() {
 
@@ -90,6 +103,8 @@ export default function App() {
     return null
   }
 
+
+
   return (
     <>
 
@@ -137,24 +152,55 @@ export default function App() {
                     source={require('./assets/system-icons/triangle.png')}
                     style={styles.chatBubble}
                   />
-                  <Text style={styles.infoMessage}>
-                    🥫 Grab any food item with a barcode to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;begin.
-                  </Text>
-                  <Text style={styles.infoMessage}>
-                    💡 Make sure barcode is clean and in a  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;well lit area.
-                  </Text>
-                  <Text style={styles.infoMessage}>
-                    🤓 All ingredients are rounded to the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearest whole number.
-                  </Text>
-                  <Text style={styles.infoMessage}>
-                    ☝️ Ingredients under 10% are placed in &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the swipable tab labeled "other".
-                  </Text>
-                  <Text style={styles.infoMessage}>
-                    💯 Items with ingredients totaling over &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100% will have sub-ingredients &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removed.
-                  </Text>
-                  <Text style={styles.infoMessage}>
-                    ℹ️ Tap the blue information icon below to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;close this message and begin &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanning!
-                  </Text>
+                  <View style={styles.infoTextWrapper}>
+                    <Text style={styles.infoMessage}>
+                      🥫
+                    </Text>
+                    <Text style={styles.infoMessage}>
+                      Grab any food item with a barcode to begin.
+                    </Text>
+                  </View>
+                  <View style={styles.infoTextWrapper}>
+                    <Text style={styles.infoMessage}>
+                      💡
+                    </Text>
+                    <Text style={styles.infoMessage}>
+                      Make sure barcode is clean and in a well lit area.
+                    </Text>
+                  </View>
+                  <View style={styles.infoTextWrapper}>
+                    <Text style={styles.infoMessage}>
+                      🤓
+                    </Text>
+                    <Text style={styles.infoMessage}>
+                      All ingredients are rounded to the nearest whole number.
+                    </Text>
+                  </View>
+                  <View style={styles.infoTextWrapper}>
+                    <Text style={styles.infoMessage}>
+                      ☝️
+                    </Text>
+                    <Text style={styles.infoMessage}>
+                      Ingredients under 10% are placed in the swipable tab labeled "other".
+                    </Text>
+                  </View>
+                  <View style={styles.infoTextWrapper}>
+
+                    <Text style={styles.infoMessage}>
+                      💯
+                    </Text>
+                    <Text style={styles.infoMessage}>
+                      Items with ingredients totaling over 100% will have sub-ingredients removed.
+                    </Text>
+                  </View>
+                  <View style={styles.infoTextWrapper}>
+                    <Text style={styles.infoMessage}>
+                      ℹ️
+                    </Text>
+                    <Text style={styles.infoMessage}>
+                      Tap the blue information icon below to close this message and begin scanning!
+                    </Text>
+                  </View>
 
                 </View>
                 : null
@@ -212,45 +258,45 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    top: 70,
+    top: "20%",
     backgroundColor: 'rgba(0,0,0,0.3)',
     width: '100%',
-    height: 100,
-
+    height: "10%",
   },
   adMobTop: {
     position: 'absolute',
     top: 0,
-
-
   },
-
   noInternet: {
     color: '#fff',
     fontFamily: 'Bubblewump',
     marginLeft: 20,
     marginRight: 20,
-    fontSize: 30
+    fontSize: normalize(26)
   },
   prompt: {
     color: '#fff',
     fontFamily: 'Bubblewump',
     marginLeft: 20,
     marginRight: 20,
-    fontSize: 25
+    fontSize: normalize(26)
   },
   icon: {
-    width: 60,
-    height: 60
+    width: width / 6.8,
+    height: height / 14.7
+  },
+  infoTextWrapper: {
+    display: 'flex',
+    flexDirection: 'row'
   },
   mainWrapper: {
     height: '100%',
     zIndex: 1
   },
   scanner: {
-    height: 300,
-    width: 380,
-    top: 20
+    height: "30%",
+    width: "90%",
+    top: "3%"
   },
   errorMessage: {
     position: 'absolute',
@@ -262,33 +308,33 @@ const styles = StyleSheet.create({
   infoContainer: {
     position: 'absolute',
     backgroundColor: '#FFF',
-    height: 400,
-    width: 390,
-    left: 10,
-    top: -390,
-    padding: 15,
+    height: height / 2.24,
+    width: "95%",
+    bottom: "95%",
+    paddingTop: "2%",
+    paddingBottom: "2%",
+    paddingLeft: "3.5%",
+    paddingRight: "9%",
     borderRadius: 20,
     display: 'flex',
     justifyContent: 'space-evenly',
-
   },
 
   infoMessage: {
-    fontSize: 18,
+    fontSize: normalize(17),
     fontWeight: '700',
-    lineHeight: 20
   },
 
   chatBubble: {
     position: 'absolute',
-    height: 30,
-    width: 30,
-    left: 3,
-    top: 385
+    height: height / 28,
+    width: width / 15,
+    left: "0.7%",
+    top: "98.7%"
   },
   infoIcon: {
-    height: 30,
-    width: 30
+    height: height / 26,
+    width: width / 12
   },
   permissionContainer: {
     flex: 1,

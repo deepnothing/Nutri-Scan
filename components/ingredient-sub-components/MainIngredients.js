@@ -1,6 +1,19 @@
-import { View, Text, Image, StyleSheet } from "react-native"
+import { View, Text, Image, StyleSheet, Dimensions, PixelRatio } from "react-native"
 import { useEffect, useState } from 'react';
 import ImageColors from 'react-native-image-colors'
+const {
+    width,
+    height,
+} = Dimensions.get('window');
+
+
+const normalize = (size, multiplier = 2) => {
+    const scale = (width / height) * multiplier;
+
+    const newSize = size * scale;
+
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+}
 
 export default function MainIngredients(props) {
     const [backgroundColor, setBackgroundColor] = useState('#EE9A0F');
@@ -89,21 +102,22 @@ export default function MainIngredients(props) {
 
 const styles = StyleSheet.create({
     ingredientLabel: {
-        fontSize: 25,
-        width: 190,
+        fontSize: normalize(27),
         marginRight: 0,
+        width: width / 2.5,
         fontFamily: 'Bubblewump',
     },
     percentage: {
-        fontSize: 40,
+        fontSize: normalize(47),
         marginLeft: 12,
         fontFamily: 'Melancholy',
 
     },
     iconStyles: {
-        width: 70,
-        height: 70,
-        marginRight: 10,
+        width: width / 6,
+        height: height / 13,
+        marginRight: "3%",
+
 
     },
     padded: {
