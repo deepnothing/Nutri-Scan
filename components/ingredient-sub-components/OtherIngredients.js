@@ -56,14 +56,14 @@ export default function OtherIngredients(props) {
             style={[styles.otheringredientStyle, { width: props.width }]}
 
         >
-            <Text style={[styles.percentage, { fontSize: props.underZero <= 9 ? normalize(35) : normalize(45) }]}>
+            <Text style={[styles.percentage, { fontSize: props.underZero <= 9 ? height / 30 : height / 20 }]}>
                 {props.defaultIcon ?
                     props.underZero
                     :
                     Math.ceil(props.ingredient.percent_estimate * 10) / 10
                 }%
             </Text>
-            <Text style={[styles.ingredientLabel, { fontSize: props.underZero <= 9 ? normalize(20) : normalize(27) }]}>
+            <Text style={[styles.ingredientLabel, { fontSize: props.underZero <= 9 ? height / 45 : height / 36 }]}>
                 {props.text.toLowerCase()}
             </Text>
 
@@ -79,7 +79,7 @@ export default function OtherIngredients(props) {
                 style={otherIconStyles(props.underZero)}
             />
 
-        </View>
+        </View >
     )
 }
 
@@ -90,11 +90,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-
         backgroundColor: '#FF6347'
     },
     ingredientLabel: {
-        width: 190,
+        width: width / 2.1,
         marginRight: 0,
         fontFamily: 'Bubblewump',
     },

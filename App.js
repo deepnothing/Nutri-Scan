@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, StatusBar, Image, ActivityIndicator, TouchableOpacity, PixelRatio, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, StatusBar, Image, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 import Ingredients from './components/Ingredients';
@@ -14,13 +14,6 @@ const {
 } = Dimensions.get('window');
 
 
-const normalize = (size, multiplier = 2) => {
-  const scale = (width / height) * multiplier;
-
-  const newSize = size * scale;
-
-  return Math.round(PixelRatio.roundToNearestPixel(newSize));
-}
 
 export default function App() {
 
@@ -272,14 +265,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Bubblewump',
     marginLeft: 20,
     marginRight: 20,
-    fontSize: normalize(26)
+    fontSize: height / 50
   },
   prompt: {
     color: '#fff',
     fontFamily: 'Bubblewump',
     marginLeft: 20,
     marginRight: 20,
-    fontSize: normalize(26)
+    fontSize: height / 37
   },
   icon: {
     width: width / 6.8,
@@ -321,7 +314,7 @@ const styles = StyleSheet.create({
   },
 
   infoMessage: {
-    fontSize: normalize(17),
+    fontSize: height / 54,
     fontWeight: '700',
   },
 

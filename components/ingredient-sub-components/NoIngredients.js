@@ -1,4 +1,4 @@
-import { View, Image, Text, StyleSheet, Dimensions, PixelRatio } from 'react-native';
+import { View, Image, Text, StyleSheet, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import GoogleAds from '../GoogleAds';
 const {
@@ -7,13 +7,6 @@ const {
 } = Dimensions.get('window');
 
 
-const normalize = (size, multiplier = 2) => {
-    const scale = (width / height) * multiplier;
-
-    const newSize = size * scale;
-
-    return Math.round(PixelRatio.roundToNearestPixel(newSize));
-}
 
 export default function NoIngredients(props) {
 
@@ -68,7 +61,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Bubblewump',
         textAlign: 'center',
         lineHeight: 40,
-        fontSize: normalize(27),
+        fontSize: height / 35,
         marginTop: "10%",
         marginLeft: 10,
         marginRight: 10

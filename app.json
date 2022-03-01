@@ -27,7 +27,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.deepnothing.foodscanner",
-      "buildNumber": "7",
+      "buildNumber": "8",
       "infoPlist": {
         "GADIsAdManagerApp": true,
         "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."
