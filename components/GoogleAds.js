@@ -8,13 +8,13 @@ export default function GoogleAds(props) {
         <SafeAreaView style={styles.adContainer}>
             <AdMobBanner
                 bannerSize="banner"
-                adUnitID="ca-app-pub-3184251687444573/7127944734" // admob-unit-id
+                adUnitID="ca-app-pub-3184251687444573/7507492726" // admob-unit-id
                 servePersonalizedAds={props.hasTrackingPermission ? true : false} // true or false
                 onDidFailToReceiveAdWithError={this.bannerError}
             />
             <AdMobBanner
                 bannerSize="banner"
-                adUnitID="ca-app-pub-3184251687444573/8874735704" // admob-unit-id
+                adUnitID="ca-app-pub-3184251687444573/8629002704" // admob-unit-id
                 servePersonalizedAds={props.hasTrackingPermission ? true : false} // true or false
                 onDidFailToReceiveAdWithError={this.bannerError}
             />
