@@ -7,6 +7,8 @@ import { useFonts } from 'expo-font';
 import { useNetInfo } from "@react-native-community/netinfo";
 import GoogleAds from './components/GoogleAds';
 
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
 
 const {
   width,
